@@ -68,6 +68,28 @@ fun SubmitButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     )
 }
 
+@Composable
+fun BackButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    AppButton(
+        text = "Back",
+        onClick = onClick,
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun LoginButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    AppButton(
+        text = "Log In",
+        onClick = onClick,
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
+        modifier = modifier
+    )
+}
+
 
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)

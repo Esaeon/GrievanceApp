@@ -5,11 +5,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val LightColors = lightColorScheme(
-    primary = UwpGreen,
+    primary = Primary,
     onPrimary = PureWhite,
-    primaryContainer = UwpGreenDark,
+    primaryContainer = Secondary,
     onPrimaryContainer = PureWhite,
     secondary = PureBlack,
     onSecondary = PureWhite,
@@ -26,9 +27,9 @@ private val LightColors = lightColorScheme(
 )
 
 private val DarkColors = darkColorScheme(
-    primary = UwpGreen,
+    primary = Primary,
     onPrimary = PureWhite,
-    primaryContainer = UwpGreenDark,
+    primaryContainer = Secondary,
     onPrimaryContainer = PureWhite,
     secondary = DarkCancel,
     onSecondary = PureWhite,
@@ -47,10 +48,17 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun GrievanceAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
+    primary: Color = Primary,
+    secondary: Color = Secondary,
     content: @Composable () -> Unit
 ) {
+    val base = if (darkTheme) DarkColors else LightColors
+
     MaterialTheme(
-        colorScheme = if (darkTheme) DarkColors else LightColors,
+        colorScheme = base.copy(
+            primary = primary,
+            primaryContainer = secondary
+        ),
         typography = Typography,
         content = content
     )

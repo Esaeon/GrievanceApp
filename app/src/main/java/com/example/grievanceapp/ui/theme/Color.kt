@@ -3,8 +3,8 @@ package com.example.grievanceapp.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // Shared by both themes
-val UwpGreen = Color(0xFF054605)
-val UwpGreenDark = Color(0xFF042504)
+val Primary = Color(0xFF054605)
+val Secondary = Color(0xFF042504)
 val PureWhite = Color(0xFFFFFFFF)
 val PureBlack = Color(0xFF000000)
 

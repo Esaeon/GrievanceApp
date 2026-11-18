@@ -1,11 +1,11 @@
 package com.example.grievanceapp.ui.modules
 
 import androidx.compose.foundation.layout.width
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.Colorize
+import androidx.compose.material.icons.filled.Contrast
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,8 +27,10 @@ import com.example.grievanceapp.ui.theme.GrievanceAppTheme
 fun AppDrawer(
     onCloseClick: () -> Unit,
     onHelpClick: () -> Unit,
-    onThemeClick: () -> Unit,
+    onLightDarkClick: () -> Unit,
+    onThemeSelectionClick: () -> Unit,
     onLogOutClick: () -> Unit,
+    showThemeSelection: Boolean,
     modifier: Modifier = Modifier
 ) {
     ModalDrawerSheet(
@@ -40,7 +43,10 @@ fun AppDrawer(
             Icon(Icons.Filled.Menu, contentDescription = "Close menu")
         }
         DrawerRow("Help", Icons.AutoMirrored.Filled.Help, onHelpClick)
-        DrawerRow("Theme Selection", Icons.Filled.Colorize, onThemeClick)
+        DrawerRow("Light/Dark Mode", Icons.Filled.Contrast, onLightDarkClick)
+        if (showThemeSelection) {
+            DrawerRow("Theme Selection", Icons.Filled.Colorize, onThemeSelectionClick)
+        }
         DrawerRow("Log Out", Icons.AutoMirrored.Filled.Logout, onLogOutClick)
     }
 }
@@ -72,8 +78,10 @@ fun AppDrawerPreview() {
         AppDrawer(
             onCloseClick = {},
             onHelpClick = {},
-            onThemeClick = {},
-            onLogOutClick = {}
+            onLightDarkClick = {},
+            onThemeSelectionClick = {},
+            onLogOutClick = {},
+            showThemeSelection = true
         )
     }
 }
