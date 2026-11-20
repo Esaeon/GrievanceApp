@@ -21,6 +21,7 @@ import com.example.grievanceapp.ui.screens.SuggestionScreen
 import com.example.grievanceapp.ui.screens.ThemeSelectionScreen
 import com.example.grievanceapp.ui.screens.placeholderContacts
 import com.example.grievanceapp.ui.theme.ThemeMode
+import com.example.grievanceapp.ui.screens.HelpScreen
 
 object Routes {
     const val LOGIN = "login"
@@ -29,6 +30,7 @@ object Routes {
     const val SUGGESTION = "suggestion"
     const val CONTACTS = "contacts"
     const val THEME_SELECTION = "theme_selection"
+    const val HELP = "help"
 }
 
 @Composable
@@ -47,6 +49,10 @@ fun AppNavHost(
 
     val openLightDark = { showThemeDialog = true }
     val openThemeSelection = { navController.navigate(Routes.THEME_SELECTION) }
+    // launchSingleTop stops repeated taps from stacking several Help screens
+    val openHelp = {
+        navController.navigate(Routes.HELP) { launchSingleTop = true }
+    }
     val logOut: () -> Unit = {
         role = null
         navController.navigate(Routes.LOGIN) {
@@ -78,7 +84,7 @@ fun AppNavHost(
                 onFileComplaint = { navController.navigate(Routes.COMPLAINT) },
                 onMakeSuggestion = { navController.navigate(Routes.SUGGESTION) },
                 onContacts = { navController.navigate(Routes.CONTACTS) },
-                onHelp = {},
+                onHelp = openHelp,
                 onLightDarkClick = openLightDark,
                 onThemeSelectionClick = { openThemeSelection() },
                 onLogOut = logOut,
@@ -123,6 +129,16 @@ fun AppNavHost(
                     onColorsChange(newPrimary, newSecondary)
                     navController.popBackStack()
                 }
+            )
+        }
+        composable(Routes.HELP) {
+            HelpScreen(
+                onBack = { navController.popBackStack() },
+                onHelp = {}, // already on this screen, the drawer just closes
+                onLightDarkClick = openLightDark,
+                onThemeSelectionClick = { openThemeSelection() },
+                onLogOut = logOut,
+                isAdmin = isAdmin
             )
         }
     }
